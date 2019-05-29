@@ -1,7 +1,7 @@
 /********************
- * 
+ *
  * Sentence reversal program using Linked List based Stack
- * 
+ *
  ********************/
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,7 +35,7 @@ int main(void)
     char buffer[BUFFER_SIZE] = { 0 };
 
     // fill our stack from the user input
-    while(1 == scanf("%s", buffer))
+    while(1 == scanf("%s", &buffer))
     {
         push(&Stack, buffer);
     }
@@ -67,7 +67,16 @@ int main(void)
  */
 Node_t *newNode(const char *value, Node_t *next)
 {
-    return NULL;
+
+    Node_t *this = malloc (sizeof(Node_t));
+
+    if(this != NULL)
+    {
+        this->value = strdup(value);
+        this->next = next;
+    }
+
+    return this;
 }
 
 /**
@@ -77,7 +86,16 @@ Node_t *newNode(const char *value, Node_t *next)
  */
 Node_t *deleteNode(Node_t *current, char **value)
 {
-    return NULL;
+    Node_t *to_return = NULL;
+
+    if(current!=NULL)
+    {
+        *value = current->value;
+        to_return = current->next;
+        free(current);
+    }
+
+    return to_return;
 }
 
 /**
@@ -88,15 +106,31 @@ Node_t *deleteNode(Node_t *current, char **value)
  */
 bool pop(Node_t **Stack, char **value)
 {
-    return false;
+    bool to_return = false;
+
+    if(Stack!=NULL)
+    {
+        *Stack = deleteNode(*Stack, value);
+        to_return = true;
+    }
+
+    return to_return;
 }
 
-/**
- * Push the string to the top of the stack using newNode
- * update the top of the stack
- * return true if everything is successfull
- */
+ /**
+  * Push the string to the top of the stack using newNode
+  * update the top of the stack
+  * return true if everything is successfull
+  */
 bool push(Node_t **Stack, const char *value)
 {
-    return false;
+    bool to_return = false;
+
+    if(Stack!=NULL)
+    {
+        *Stack = newNode(value, *Stack);
+        to_return = true;
+    }
+
+    return to_return;
 }
