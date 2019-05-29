@@ -39,11 +39,17 @@ all_tests: test1 test2 test3
 
 test1: Stack
 	./Stack < Data/test1.input > test1.result
+	./TestPassed.sh test1.result Data/test1.expected
+
 
 test2: Stack
 	./Stack < Data/test2.input > test2.result
+	./TestPassed.sh test1.result Data/test1.expected
+
 
 test3: Stack
 	./Stack < Data/test3.input > test3.result
+	./TestPassed.sh test1.result Data/test1.expected
+
 
 	#################################################################
